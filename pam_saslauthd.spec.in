@@ -1,15 +1,14 @@
-Name: pam_sasl
+Name: pam_saslauthd
 Version: @VERSION@
 Release: 0
 License: MIT
-Source: pam_sasl-%{version}.tar.gz
+Source: pam_saslauthd-%{version}.tar.gz
 Summary: A pluggable authentication module (PAM) which uses SASL secrets.
 Group: System/Libraries
-BuildRequires: pam-devel
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
+BuildRequires: pam-devel, cyrus-sasl-devel
 
 %description
-The pam_sasl module uses the SASL library's facilities for checking user
+The pam_saslauthd module uses the SASL library's facilities for checking user
 passwords, and attempts to update the SASL secrets store when users change
 their passwords.
 
@@ -17,13 +16,13 @@ their passwords.
 %setup -q
 
 %build
-%configure --libdir=/%{_lib}
+%configure
 make
 
 %install
 rm -fr $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
-rm -f $RPM_BUILD_ROOT/%{_lib}/security/*.la
+rm -f $RPM_BUILD_ROOT/%{_libdir}/security/*.la
 
 %clean
 rm -fr $RPM_BUILD_ROOT
@@ -31,5 +30,5 @@ rm -fr $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root)
 %doc README
-/%{_lib}/security/*
+%{_libdir}/security/*
 %{_mandir}/man8/*
