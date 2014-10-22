@@ -326,6 +326,7 @@ pam_sm_chauthtok(pam_handle_t *pamh, int flags, int argc, const char **argv)
 	use_first_pass = 0;
 	use_authtok = 0;
 	service = NULL;
+	migrate = 0;
 	for (ret = 0; ret < argc; ret++) {
 		if (strcmp(argv[ret], "debug") == 0) {
 			debug++;

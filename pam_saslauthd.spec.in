@@ -29,6 +29,6 @@ rm -fr $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
-%doc README
+%doc README.md
 %{_libdir}/security/*
 %{_mandir}/man8/*
