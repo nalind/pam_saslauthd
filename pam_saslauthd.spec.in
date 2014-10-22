@@ -1,0 +1,35 @@
+Name: pam_sasl
+Version: @VERSION@
+Release: 0
+License: MIT
+Source: pam_sasl-%{version}.tar.gz
+Summary: A pluggable authentication module (PAM) which uses SASL secrets.
+Group: System/Libraries
+BuildRequires: pam-devel
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+
+%description
+The pam_sasl module uses the SASL library's facilities for checking user
+passwords, and attempts to update the SASL secrets store when users change
+their passwords.
+
+%prep
+%setup -q
+
+%build
+%configure --libdir=/%{_lib}
+make
+
+%install
+rm -fr $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+rm -f $RPM_BUILD_ROOT/%{_lib}/security/*.la
+
+%clean
+rm -fr $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%doc README
+/%{_lib}/security/*
+%{_mandir}/man8/*

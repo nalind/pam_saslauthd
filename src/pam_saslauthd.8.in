@@ -1,0 +1,49 @@
+.\" Copyright 2001,2005 Red Hat, Inc.
+.TH pam_saslauthd 8 2005/08/27 "Red Hat" "System Administrator's Manual"
+
+.SH NAME
+pam_saslauthd \- check and set passwords using SASL
+
+.SH SYNOPSIS
+.B auth sufficient @libdir@/security/pam_saslauthd.so [\fIargs\fP]
+.br
+.B password required @libdir@/security/pam_saslauthd.so
+
+.SH DESCRIPTION
+pam_saslauthd checks user passwords using libsasl2, which can be configured to use
+an auxprop database such as sasldb.  Using this module should allow "passwd" to
+perform the same function as "saslpasswd", and work properly for unprivileged
+users as well.
+
+.SH ARGUMENTS
+.IP realm=\fBREALM\fP
+authenticate users in a realm other than the default (the default is selected
+by libsasl2).
+.IP service=\fBSERVICE\fP
+uses a service other than the default (which is the PAM service the module is
+being called by, i.e., \fIlogin\fP or \fIftp\fP).  \fBNOTE:\fP if you do not
+use this option, and do not override the \fIpwcheck_method\fP setting in a the
+\fI/usr/lib/sasl2/\fBSERVICE\fP.conf\fR file, then libsasl2 may attempt to use
+\fIsaslauthd\fP to authenticate the user, and if \fIsaslauthd\fP is in turn
+configured to use PAM, bad things will happen.
+.IP use_first_pass
+when authenticating users or checking passwords as part of a password change
+operation, use the password read by an earlier module in the stack, and fail if
+it is not correct.
+.IP try_first_pass
+when authenticating users or checking passwords as part of a password change
+operation, try the password read by an earlier module in the stack, and prompt
+the user for one if one was not set.
+.IP use_authtok
+when changing passwords, use the value for the new password which was read by
+an earlier module in the stack rather than asking the user.
+
+.SH FILES
+/etc/sasldb2
+/usr/lib/sasl2/<pam-servicename>.conf
+
+.SH BUGS
+Let's hope not, but if you find any, please report them to the author.
+
+.SH AUTHOR
+Nalin Dahyabhai <nalin@redhat.com>
