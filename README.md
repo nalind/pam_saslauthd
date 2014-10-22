@@ -2,7 +2,8 @@ pam_saslauthd
 =============
 Checks and sets passwords using libsasl2.  You should be able to use
 this instead of _pam\_unix_ for primary authentication.  NOT heavily
-tested and therefore NOT recommended for actual deployments.
+tested and therefore NOT recommended for actual deployments.  Probably
+also has some bugs in the password changing functions.
 
 RECOGNIZED ARGUMENTS
 --------------------
