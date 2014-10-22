@@ -7,15 +7,15 @@ also has some bugs in the password changing functions.
 
 RECOGNIZED ARGUMENTS
 --------------------
-- *realm*=_REALM_
+- *realm*=**REALM**
  - use REALM for the given realm instead of the default
-- *service*=_SERVICE_
+- *service*=**SERVICE**
  - use the given service instead of the PAM service's name
-- *use_first_pass
+- *use\_first\_pass*
  - use the AUTHTOK on the stack (auth only)
-- *try_first_pass*
+- *try\_first\_pass*
  - use the AUTHTOK on the stack if it exists, otherwise prompt the user (auth only, this is the default)
-- *use_authtok*
+- *use\_authtok*
  - use the AUTHTOK on the stack instead of prompting the user for the current or new password (password only)
 
 MODULE SERVICES PROVIDED
